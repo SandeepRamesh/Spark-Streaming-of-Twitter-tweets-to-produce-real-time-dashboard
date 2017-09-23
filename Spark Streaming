@@ -1,0 +1,10 @@
+#Mapper and Reducer to process the tweets
+#To be executed in a Jupyter after the TweetRead.py is run
+
+( lines.flatMap( lambda text: text.split( " " ) ) #Splits to a list
+  .filter( lambda word: word.lower().startswith("#") ) # Checks for hashtag calls
+  .map( lambda word: ( word.lower(), 1 ) ) # Lower cases the word
+  .reduceByKey( lambda a, b: a + b ) # Reduces
+  .map( lambda rec: Tweet( rec[0], rec[1] ) ) # Stores in a Tweet Object
+  .foreachRDD( lambda rdd: rdd.toDF().sort( desc("count") ) # Sorts Them in a DF
+  .limit(10).registerTempTable("tweets") ) ) # Registers to a table.
