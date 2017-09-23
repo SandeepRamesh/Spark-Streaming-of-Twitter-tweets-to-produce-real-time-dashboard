@@ -1,1 +1,2 @@
 # Spark-Streaming-of-Twitter-tweets-to-produce-real-time-dashboard
+The purpose of this project was to ingest real time data from Twitter using Tweepy API and Spark Streaming. The collected tweets were then tokenized and filtered with hash tags to get the counts of the hashtags.  The resulting tags and counts were then stored in a temporary table to be used later by a SQLContext from pyspark.  The resulting object of the SQLContext  was then converted into a Pandas Dataframe to be used later as the data for visualization in Seaborn bar plots.
